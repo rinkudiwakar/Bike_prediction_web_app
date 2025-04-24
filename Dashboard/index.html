@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BikeShare Forecast | Demand Prediction Tool</title>
+  <link rel="stylesheet" href="index.css" type="text/css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+  <link rel="icon" type="image/svg+xml" href="./images/rinku_image1.png" />
+</head>
+
+
+<body>
+  <header>
+    <div class="container">
+      <div class="navbar">
+        <div class="nav-container">
+          <div class="logo">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="3"></circle>
+              <line x1="12" y1="2" x2="12" y2="5"></line>
+              <line x1="12" y1="19" x2="12" y2="22"></line>
+              <line x1="5" y1="12" x2="2" y2="12"></line>
+              <line x1="22" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>BikeShare Forecast</span>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/mrdiwakar1/" title="LinkedIn Profile" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+          <a href="https://github.com/rinkudiwakar" title="GitHub Profile" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+              </path>
+            </svg>
+          </a>
+          <a href="https://drive.google.com/file/d/1IXGZGJWwwl296DxGCQPJNF2Vo0wNywW4/view?usp=sharing"
+            title="View Resume" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+          </a>
+          <a href="https://rinkudiwakar.vercel.app/" title="My Profile" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M4 21v-2a4 4 0 0 1 3-3.87"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </a>
+          
+          <!-- WhatsApp Chat Link: replace with your full phone number (country code + number) -->
+          <a href="https://api.whatsapp.com/send/?phone=9137438718&text=Hi+Rinku&type=phone_number&app_absent=0" title="WhatsApp Chat" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16.5 3.5a11 11 0 0 0-11 11c0 1.6.39 
+                         3.12 1.08 4.46L3 21l2.82-3.59A10.9 
+                         10.9 0 0 0 12 21a11 11 0 0 0 
+                         11-11 11 11 0 0 0-6.5-9.5z"></path>
+              <path d="M16 11.34c-.27-.14-1.6-.79-1.85-.88-.25-.08-.43-.12-.61.12-
+                         .18.24-.7.88-.86 1.06-.16.18-.32.2-
+                         .59.07-.27-.14-1.13-.42-2.16-1.3-
+                         .8-.71-1.34-1.59-1.5-1.86-
+                         .16-.27-.02-.42.12-.56.12-.12.27-
+                         .32.4-.48.13-.16.17-.27.27-.45.09-
+                         .18.04-.34-.02-.48-.07-.14-.61-
+                         1.48-.84-2.04-.22-.52-.45-.45-
+                         .61-.45h-.52c-.17 0-.45.06-.69.32s-
+                         .9.88-.9 2.14.92 2.49 1.05 
+                         2.66c.12.16 1.81 2.76 4.39 
+                         3.87.61.26 1.1.41 1.48.53.62.19 
+                         1.18.16 1.62.1.5-.07 
+                         1.6-.65 1.83-1.28.23-.63.23-
+                         1.17.16-1.28-.07-.11-.25-.18-
+                         .52-.32z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Predict Bike Sharing Demand with Precision</h1>
+      <p>Our AI-powered tool helps you optimize your bike fleet and meet user demands effectively</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <section class="dashboard">
+      <div class="input-panel">
+        <h2>Input Parameters</h2>
+        <form id="prediction-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="date">Date</label>
+              <input type="date" id="date" value="2025-04-24" required>
+            </div>
+            <div class="form-group">
+              <label for="hour">Hour (0-23)</label>
+              <input type="number" id="hour" min="0" max="23" value="9" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="temperature">Temperature (°C)</label>
+              <input type="number" id="temperature" min="-20" max="50" step="0.1" value="25" required>
+            </div>
+            <div class="form-group">
+              <label for="humidity">Humidity (%)</label>
+              <input type="number" id="humidity" min="0" max="100" step="0.1" value="25" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="wind-speed">Wind Speed (m/s)</label>
+              <input type="number" id="wind-speed" min="0" max="100" step="0.1" value="60" required>
+            </div>
+            <div class="form-group">
+              <label for="visibility">Visibility (km)</label>
+              <input type="number" id="visibility" min="0" max="10000" step="0.1" value="60" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="solar-radiation">Solar Radiation (MJ/m²)</label>
+              <input type="number" id="solar-radiation" min="0" max="10" step="0.1" value="1.8" required>
+            </div>
+            <div class="form-group">
+              <label for="rainfall">Rainfall (mm)</label>
+              <input type="number" id="rainfall" min="0" max="100" step="0.1" value="0.7" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="snowfall">Snowfall (cm)</label>
+              <input type="number" id="snowfall" min="0" max="100" step="0.1" value="0.2" required>
+            </div>
+            <div class="form-group">
+              <label for="seasons">Season</label>
+              <select id="seasons" required>
+                <option value="Spring">Spring</option>
+                <option value="Summer" selected>Summer</option>
+                <option value="Autumn">Autumn</option>
+                <option value="Winter">Winter</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="holiday">Holiday</label>
+              <select id="holiday" required>
+                <option value="No Holiday" selected>No Holiday</option>
+                <option value="Holiday">Holiday</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="functioning-day">Functioning Day</label>
+              <select id="functioning-day" required>
+                <option value="Yes" selected>Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" id="predict-button">Predict Bike Demand</button>
+        </form>
+      </div>
+
+      <div class="result-panel">
+        <h2>Prediction Results</h2>
+        <div class="result-content">
+          <div class="prediction-result">
+            <div class="prediction-value" id="predicted-count">748</div>
+            <div class="prediction-label">Estimated Bike Rentals</div>
+          </div>
+          <div class="chart-container">
+            <img src="./images/images1.jpg" alt="Prediction histogram" style="max-width: 100%; height: auto;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <h2>Why Choose Our Prediction Tool?</h2>
+      <div class="feature-cards">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20v-6M6 20V10M18 20V4"></path>
+            </svg>
+          </div>
+          <h3>Data-Driven Insights</h3>
+          <p>Leverage historical usage and weather trends to generate highly accurate demand forecasts, reducing empty
+            docks
+            and
+            overstock.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <h3>Instant, Hour-by-Hour Forecasts</h3>
+          <p>Submit your chosen date, time, and conditions to receive real-time predictions that adapt to sudden changes
+            in
+            weather
+            or calendar events.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <h3>Intuitive Dashboard</h3>
+          <p>Easily input parameters and view predicted bike counts alongside a dynamic mini-chart—no data science
+            background
+            required.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+  
+        <div class="footer-about">
+          <h3>About BikeShare Forecast</h3>
+          <p>
+            I built a real-time bike-sharing demand forecasting tool using XGBoost—combining weather data, time features,
+            and holiday/season flags—to empower operators with precise, hour-by-hour predictions for optimal fleet
+            management.
+          </p>
+        </div>
+  
+        <div class="footer-connect">
+          <h3>Want to work with me?</h3>
+          <div class="footer-connect-links">
+            <a href="mailto:diwakar.active@gmail.com" class="connect-link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              Email me
+            </a>
+            <a href="https://www.linkedin.com/in/mrdiwakar1/" class="connect-link" target="_blank">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+              LinkedIn
+            </a>
+            <a href="https://github.com/rinkudiwakar" class="connect-link" target="_blank">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 
+                     6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 
+                     1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 
+                     5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 
+                     3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 
+                     18.13V22"></path>
+              </svg>
+              GitHub
+            </a>
+            <a href="https://drive.google.com/file/d/1IXGZGJWwwl296DxGCQPJNF2Vo0wNywW4/view?usp=sharing"
+              class="connect-link" target="_blank">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              View Resume
+            </a>
+          </div>
+        </div>
+  
+        <div class="footer-contact">
+          <h3>Chat with me</h3>
+          <p>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <a href="mailto:diwakar.active@gmail.com">diwakar.active@gmail.com</a>
+          </p>
+          <p>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 
+                       19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 
+                       19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 
+                       2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 
+                       2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 
+                       0 0 0 6 6l1.27-1.27a2 2 0 0 1 2-.45 12.84 
+                       12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <a href="tel:+91 9137438718">+91 9137438718</a>
+          </p>
+          <p>
+            <a href="https://api.whatsapp.com/send/?phone=9137438718&text=Hi+Rinku&type=phone_number&app_absent=0"
+              class="connect-link" target="_blank" title="Chat on WhatsApp">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16.5 3.5a11 11 0 0 0-11 11c0 1.6.39 
+                         3.12 1.08 4.46L3 21l2.82-3.59A10.9 
+                         10.9 0 0 0 12 21a11 11 0 0 0 
+                         11-11 11 11 0 0 0-6.5-9.5z"></path>
+                <path d="M16 11.34c-.27-.14-1.6-.79-1.85-.88-.25-.08-.43-.12-.61.12-
+                         .18.24-.7.88-.86 1.06-.16.18-.32.2-
+                         .59.07-.27-.14-1.13-.42-2.16-1.3-
+                         .8-.71-1.34-1.59-1.5-1.86-
+                         .16-.27-.02-.42.12-.56.12-.12.27-
+                         .32.4-.48.13-.16.17-.27.27-.45.09-
+                         .18.04-.34-.02-.48-.07-.14-.61-
+                         1.48-.84-2.04-.22-.52-.45-.45-
+                         .61-.45h-.52c-.17 0-.45.06-.69.32s-
+                         .9.88-.9 2.14.92 2.49 1.05 
+                         2.66c.12.16 1.81 2.76 4.39 
+                         3.87.61.26 1.1.41 1.48.53.62.19 
+                         1.18.16 1.62.1.5-.07 
+                         1.6-.65 1.83-1.28.23-.63.23-
+                         1.17.16-1.28-.07-.11-.25-.18-
+                         .52-.32z"></path>
+              </svg>
+              Chat on WhatsApp
+            </a>
+          </p>
+        </div>
+  
+      </div>
+    </div>
+  </footer>
+
+  <script src="index.js">
+  </script>
+</body>
+
+</html>
