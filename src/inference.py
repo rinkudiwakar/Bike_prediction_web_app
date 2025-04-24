@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 import pandas as pd
 import numpy as np
+import xgboost as xgb
 
 class Inference:
     def __init__(self, model_path: str, sc_path: str):
@@ -12,7 +13,9 @@ class Inference:
             )
         self.model  = pickle.load(open(model_path,  'rb'))
         self.scaler = pickle.load(open(sc_path,     'rb'))
-
+        if isinstance(self.model, (xgb.XGBRegressor, xgb.XGBClassifier)):
+            self.model.set_params(tree_method='hist')
+            
     def _parse_date(self, date_str: str) -> dict:
         dt = datetime.strptime(date_str, "%d/%m/%Y")
         return {
