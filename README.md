@@ -53,12 +53,12 @@ This project builds a regression model to forecast bike-sharing counts in Seoul 
 │
 ├── requirements.txt            
 ├── runtime.txt                 
-└── README.md                    
-```
-🔧 Installation
+└── README.md   
 
-1. Clone the repo
-  
+## 🔧 Installation
+
+1. **Clone the repo**
+```
    git clone https://github.com/your-username/seoul-bike-prediction.git
    cd seoul-bike-prediction
    ```
